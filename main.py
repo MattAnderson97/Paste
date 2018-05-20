@@ -56,9 +56,10 @@ def save_code(lang, title, code):
         cursor.execute(sql, (id, lang, title, code))
     return id
 
+
 @app.route("/")
 def index():
-    return render_template('index.pug')
+    return render_template('index.pug', url=settings["host"] + settings["port"])
 
 
 @app.route("/submit", methods=["POST"])
@@ -85,7 +86,7 @@ def read(url):
         lang_ = data[1]
         name_ = data[2]
         code_ = data[3].replace("\\n", "\n")
-        return render_template('code.pug', lang=lang_, name=name_, code=code_)
+        return render_template('code.pug', lang=lang_, name=name_, code=code_, url=settings["host"] + settings["port"])
     return abort(404)
 
 if __name__ == "__main__":

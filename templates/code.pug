@@ -7,7 +7,7 @@ link(rel="stylesheet", href="{{ url_for('static', filename='css/prism.css') }}")
 {% endblock %}
 
 {% block content %}
-h3.name {{ name }}
+h2.name {{ name }}
 .code-view
     pre: code(class="language-{{ lang }}")
         {{ code }}
@@ -16,15 +16,14 @@ h3.name {{ name }}
 script(src="{{ url_for('static', filename='js/prism.js') }}")
 script.
     Prism.plugins.NormalizeWhitespace.setDefaults({
-        'remove-trailing': true,
         'remove-indent': true,
         'left-trim': true,
         'right-trim': true,
         'tabs-to-spaces': 4,
-        /*'break-lines': 80,
+        /*'remove-trailing': true,
+        'break-lines': 80,
         'indent': 2,
         'remove-initial-line-feed': false,
         'spaces-to-tabs': 4*/
     });
-
 {% endblock %}

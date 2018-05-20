@@ -1,20 +1,11 @@
 var btn = document.getElementById("submit");
+var copy = document.getElementById("copy");
 var title = document.getElementById("title");
-var code = document.getElementById("code");
 var language = document.getElementById("language");
 var xhr = new XMLHttpRequest();
 
 btn.addEventListener('click', submitCode);
 xhr.addEventListener("load", transferComplete);
-
-function copyToClipboard(text){
-    var dummy = document.createElement("input");
-    document.body.appendChild(dummy);
-    dummy.setAttribute('value', text);
-    dummy.select();
-    document.execCommand("copy");
-    document.body.removeChild(dummy);
-}
 
 function submitCode()
 {
@@ -41,5 +32,5 @@ function submitCode()
 
 function transferComplete(evt)
 {
-    window.location.replace(xhr.responseText)
+    window.location.replace(evt.responseText)
 }
