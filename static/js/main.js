@@ -26,6 +26,6 @@ function submitCode()
     var code_input = code.value;
 
     xhr.open("POST", "/submit", true);
-    xhr.setRequestHeader("Content-type", "application/json;charset=UTF-8")
+    xhr.setRequestHeader("Content-type", "text/plain");
     xhr.send('{"language": "' + lang_input + '", "title": "' + title_input + '", "code": "' + code_input + '"}')
 }

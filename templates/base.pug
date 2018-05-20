@@ -1,0 +1,17 @@
+doctype 5
+include titlebar
+
+html
+    head
+        meta(charset="utf-8")
+        title Paste {% block title %}{% endblock %}
+        {% block styles %}{% endblock %}
+        link(rel="stylesheet", type="text/css", href="{{ url_for('static', filename='css/main.css') }}")
+    body
+        +title
+        .content
+            {% block content %}
+            {% endblock %}
+        .footer
+            a(href="https://github.com/wolvfang", style="text-decoration: none;"): span.footer-text &copy Copyright Wolveh, 2018
+    {% block scripts_after %}{% endblock %}

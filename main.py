@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import abort, Flask, render_template, request
 from sqlite3 import OperationalError
 import uuid
 import sqlite3
@@ -8,6 +8,10 @@ from settings import settings
 app = Flask(__name__)
 
 app.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
+
+
+def replacelast(line: str, delimiter: str, replace: str, count: int) -> str:
+    return replace.join(line.rsplit(delimiter, count))
 
 
 def check_table():
@@ -59,15 +63,30 @@ def index():
 
 @app.route("/submit", methods=["POST"])
 def submit():
-    data_dict = request.json
+    data = request.data.decode('utf-8').replace("\n", "\\n")
+    split_data = replacelast(data.replace("{", "", 1), "}", "", 1).split(", ", 2)
 
-    lang = data_dict['language']
-    title = data_dict['title']
-    code = data_dict['code']
+    lang = replacelast(split_data[0].split(": ", 1)[1].replace("\"", "", 1), "\"", "", 1)
+    title = replacelast(split_data[1].split(": ", 1)[1].replace("\"", "", 1), "\"", "", 1)
+    code = replacelast(split_data[2].split(": ", 1)[1].replace("\"", "", 1), "\"", "", 1)
 
     save_code(lang, title, code)
+    print("saved")
     return ""
 
+
+@app.route("/<url>")
+def read(url):
+    sql = "SELECT * from paste WHERE URL=?"
+    with sqlite3.connect('paste.db') as conn:
+        cursor = conn.cursor()
+        result = cursor.execute(sql, (url,))
+        data = result.fetchall()[0]
+        lang_ = data[1]
+        name_ = data[2]
+        code_ = data[3].replace("\\n", "\n")
+        return render_template('code.pug', lang=lang_, name=name_, code=code_)
+    return abort(404)
 
 if __name__ == "__main__":
     check_table()

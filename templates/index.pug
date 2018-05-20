@@ -1,33 +1,27 @@
-doctype 5
-include titlebar
-
-html
-    head
-        meta(charset="utf-8")
-        title Paste
-        link(rel="stylesheet", type="text/css", href="{{ url_for('static', filename='css/main.css') }}")
-    body
-        +title
-        .content
-            .language-selector
-                label(for="language").label Language
-                br
-                select(id="language")
-                    option(value="none") None
-                    option(value="python") Python
-                    option(value="java") Java
-                    option(value="c++") C++
-                    option(value="c#") C#
-            .title
-                label(for="title").label Title
-                br
-                input(id="title", type="text")
-            .code
-                label(for="code").label Code
-                br
-                textarea(id="code")
-            .submit
-                input(id="submit", type="button", value="Save code")
-        .footer
-            a(href="https://github.com/wolvfang", style="text-decoration: none;"): span.footer-text &copy Copyright Wolveh, 2018
-    script(src="{{ url_for('static', filename='js/main.js') }}")
+{% extends "base.pug" %}
+{% block content %}
+.language-selector
+    label(for="language").label Language
+    br
+    select(id="language")
+        option(value="none") None
+        option(value="python") Python
+        option(value="java") Java
+        option(value="javascript") JavaScript
+        option(value="cpp") C++
+        option(value="csharp") C#
+        option(value="latex") LaTeX
+.title
+    label(for="title").label Title
+    br
+    input(id="title", type="text")
+.code
+    label(for="code").label Code
+    br
+    textarea(id="code")
+.submit
+    input(id="submit", type="button", value="Save code")
+{% endblock %}
+{% block scripts_after %}
+script(src="{{ url_for('static', filename='js/main.js') }}")
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.pug" %}
+
+{% block title %} - {{ name }} {% endblock %}
+{% block styles %}
+<!-- Prism code highlighting -->
+link(rel="stylesheet", href="{{ url_for('static', filename='css/prism.css') }}")
+{% endblock %}
+
+{% block content %}
+h3.name {{ name }}
+.code-view
+    pre: code(class="language-{{ lang }}")
+        {{ code }}
+{% endblock %}
+{% block scripts_after %}
+script(src="{{ url_for('static', filename='js/prism.js') }}")
+script.
+    Prism.plugins.NormalizeWhitespace.setDefaults({
+        'remove-trailing': true,
+        'remove-indent': true,
+        'left-trim': true,
+        'right-trim': true,
+        'tabs-to-spaces': 4,
+        /*'break-lines': 80,
+        'indent': 2,
+        'remove-initial-line-feed': false,
+        'spaces-to-tabs': 4*/
+    });
+
+{% endblock %}
