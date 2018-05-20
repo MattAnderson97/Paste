@@ -54,7 +54,7 @@ def save_code(lang, title, code):
     with sqlite3.connect('paste.db') as conn:
         cursor = conn.cursor()
         cursor.execute(sql, (id, lang, title, code))
-
+    return id
 
 @app.route("/")
 def index():
@@ -70,9 +70,9 @@ def submit():
     title = replacelast(split_data[1].split(": ", 1)[1].replace("\"", "", 1), "\"", "", 1)
     code = replacelast(split_data[2].split(": ", 1)[1].replace("\"", "", 1), "\"", "", 1)
 
-    save_code(lang, title, code)
+    id = save_code(lang, title, code)
     print("saved")
-    return ""
+    return "http://" + request.base_url.split("//", 1)[1].split("/", 1)[0] + "/" + id
 
 
 @app.route("/<url>")
