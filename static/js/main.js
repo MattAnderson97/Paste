@@ -32,5 +32,5 @@ function submitCode()
 
 function transferComplete(evt)
 {
-    window.location.replace(evt.responseText)
+    window.location.replace(xhr.responseText)
 }

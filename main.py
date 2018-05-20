@@ -59,7 +59,7 @@ def save_code(lang, title, code):
 
 @app.route("/")
 def index():
-    return render_template('index.pug', url=settings["host"] + settings["port"])
+    return render_template('index.pug', url=settings["host"])
 
 
 @app.route("/submit", methods=["POST"])
@@ -73,21 +73,23 @@ def submit():
 
     id = save_code(lang, title, code)
     print("saved")
-    return "http://" + request.base_url.split("//", 1)[1].split("/", 1)[0] + "/" + id
+    return settings["host"] + "/" + id
 
 
 @app.route("/<url>")
 def read(url):
-    sql = "SELECT * from paste WHERE URL=?"
-    with sqlite3.connect('paste.db') as conn:
-        cursor = conn.cursor()
-        result = cursor.execute(sql, (url,))
-        data = result.fetchall()[0]
-        lang_ = data[1]
-        name_ = data[2]
-        code_ = data[3].replace("\\n", "\n")
-        return render_template('code.pug', lang=lang_, name=name_, code=code_, url=settings["host"] + settings["port"])
+    if len(url) == 5:
+        sql = "SELECT * from paste WHERE URL=?"
+        with sqlite3.connect('paste.db') as conn:
+            cursor = conn.cursor()
+            result = cursor.execute(sql, (url,))
+            data = result.fetchall()[0]
+            lang_ = data[1]
+            name_ = data[2]
+            code_ = data[3].replace("\\n", "\n")
+            return render_template('code.pug', lang=lang_, name=name_, code=code_, url=settings["host"])
     return abort(404)
+
 
 if __name__ == "__main__":
     check_table()
