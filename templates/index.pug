@@ -9,23 +9,24 @@ html
     body
         +title
         .content
-            form
-                .language-selector
-                    label(for="language").label Language
-                    br
-                    select(id="language")
-                        option(value="none") None
-                        option(value="python") Python
-                        option(value="java") Java
-                        option(value="c++") C++
-                        option(value="c#") C#
-                .title
-                    label(for="title").label Title
-                    br
-                    input(id="title", type="text", required)
-                .code
-                    label(for="code").label Code
-                    br
-                    textarea(id="code", required)
+            .language-selector
+                label(for="language").label Language
+                br
+                select(id="language")
+                    option(value="none") None
+                    option(value="python") Python
+                    option(value="java") Java
+                    option(value="c++") C++
+                    option(value="c#") C#
+            .title
+                label(for="title").label Title
+                br
+                input(id="title", type="text")
+            .code
+                label(for="code").label Code
+                br
+                textarea(id="code")
+            .submit
+                input(id="submit", type="button", value="Save code")
         .footer
             a(href="https://github.com/wolvfang", style="text-decoration: none;"): span.footer-text &copy Copyright Wolveh, 2018
