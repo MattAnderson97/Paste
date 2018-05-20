@@ -1,0 +1,31 @@
+doctype 5
+include titlebar
+
+html
+    head
+        meta(charset="utf-8")
+        title Paste
+        link(rel="stylesheet", type="text/css", href="{{ url_for('static', filename='css/main.css') }}")
+    body
+        +title
+        .content
+            form
+                .language-selector
+                    label(for="language").label Language
+                    br
+                    select(id="language")
+                        option(value="none") None
+                        option(value="python") Python
+                        option(value="java") Java
+                        option(value="c++") C++
+                        option(value="c#") C#
+                .title
+                    label(for="title").label Title
+                    br
+                    input(id="title", type="text", required)
+                .code
+                    label(for="code").label Code
+                    br
+                    textarea(id="code", required)
+        .footer
+            a(href="https://github.com/wolvfang", style="text-decoration: none;"): span.footer-text &copy Copyright Wolveh, 2018

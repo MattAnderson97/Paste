@@ -1,0 +1,104 @@
+@import url("titlebar.css");
+
+*, html
+{
+    margin: 0;
+}
+
+body, html
+{
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.content
+{
+    flex: 1 0 auto;
+    width: 70%;
+    margin: auto;
+}
+
+.label
+{
+    margin-bottom: 5px;
+    font-family: "Exo 2", sans-serif;
+    font-size: 14px;
+    font-style: italic;
+    color: #aaa;
+}
+
+.language-selector,
+.title,
+.code
+{
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.language-selector select,
+.title input,
+.code textarea
+{
+    width: 100%;
+    margin-top: 5px;
+
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+
+.language-selector select
+{
+    width: calc(100% + 6px);
+    height: 30px;
+
+    /* for Firefox */
+    -moz-appearance: none;
+    /* for Chrome */
+    -webkit-appearance: none;
+
+    background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+    font-family: "Exo 2", sans-serif;
+    color: #000;
+}
+
+.language-selector select::-ms-expand
+{
+    /* IE 10+ */
+    display: none;
+}
+.title input
+{
+    height: 30px;
+}
+
+.code textarea
+{
+    height: 400px;
+}
+
+.footer
+{
+    flex: none;
+    height: 25px;
+    background-color: #2e2e3a;
+    text-align: center;
+}
+
+.footer-text
+{
+    display: inline-block;
+    width: 200px;
+    margin: auto;
+    text-align: center;
+    color: #fff;
+    line-height: 25px;
+    font-family: "Exo 2", sans-serif;
+}

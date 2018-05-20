@@ -1,0 +1,23 @@
+.title-bar
+{
+    top: 0;
+    width: 100%;
+    height: 45px;
+    background-color: #2e2e3a;
+}
+
+.title-bar>.title
+{
+    margin: 0 0 0 10px;
+    display: inline-block;
+    float: left;
+}
+
+.title-bar>.title>a
+{
+    text-decoration: none;
+    line-height: 45px;
+    font-family: "Exo 2", sans-serif;
+    font-size: 20px;
+    color: #fff;
+}
